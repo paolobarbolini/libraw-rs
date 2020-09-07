@@ -1,0 +1,20 @@
+[package]
+name = "libraw-sys"
+version = "0.0.1+libraw-0.20.0" # remember to update html_root_url
+authors = ["Paolo Barbolini <paolo@paolo565.org>"]
+description = "FFI bindings to LibRaw"
+license = "MIT/Apache-2.0"
+repository = "https://github.com/paolobarbolini/libraw-rs"
+categories = ["multimedia::images", "external-ffi-bindings"]
+keywords = ["raw"]
+readme = "README.md"
+edition = "2018"
+build = "build.rs"
+include = ["src/lib.rs", "LICENSE-*", "README.md", "libraw/libraw/*", "libraw/src/*", "libraw/internal/*", "libraw/COPYRIGHT", "libraw/LICENSE.*", "build.rs"]
+
+[dependencies]
+libc = "0.2"
+
+[build-dependencies]
+cc = { version = "1", features = ["parallel"] }
+bindgen = { version = "0.55.1", default-features = false, features = ["runtime"] }

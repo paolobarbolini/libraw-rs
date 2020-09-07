@@ -1,5 +1,5 @@
 [package]
-name = "libraw"
+name = "libraw-rs"
 version = "0.0.1" # remember to update html_root_url
 authors = ["Paolo Barbolini <paolo@paolo565.org>"]
 description = "LibRaw bindings"
@@ -11,4 +11,4 @@ readme = "README.md"
 edition = "2018"
 
 [dependencies]
-libraw-rs-sys = { version = "0.0.1", package = "libraw-sys", path = "../libraw-sys" }
+libraw-rs-sys = { version = "0.0.1", path = "../libraw-sys" }

@@ -10,5 +10,8 @@ keywords = ["raw"]
 readme = "README.md"
 edition = "2018"
 
+[lib]
+name = "libraw"
+
 [dependencies]
 libraw-rs-sys = { version = "0.0.1", path = "../libraw-sys" }

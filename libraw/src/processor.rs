@@ -1,5 +1,5 @@
 use crate::{Error, ProcessedImage, Result};
-use libraw_rs_sys as sys;
+use libraw_sys as sys;
 
 pub struct Processor {
     inner: *mut sys::libraw_data_t,

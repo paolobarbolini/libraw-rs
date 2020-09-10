@@ -12,6 +12,9 @@ edition = "2018"
 build = "build.rs"
 include = ["src/lib.rs", "LICENSE-*", "README.md", "libraw/libraw/*", "libraw/src/*", "libraw/internal/*", "libraw/COPYRIGHT", "libraw/LICENSE.*", "build.rs"]
 
+[lib]
+name = "libraw_sys"
+
 [dependencies]
 libc = "0.2"
 

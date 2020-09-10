@@ -1,7 +1,7 @@
 use std::fs::{self, File};
 use std::io::Write;
 
-use libraw_rs::Processor;
+use libraw::Processor;
 
 fn main() {
     let buf = fs::read("raw.RW2").expect("read in");

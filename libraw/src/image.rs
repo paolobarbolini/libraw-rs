@@ -1,7 +1,7 @@
 use std::ops::Deref;
 use std::slice;
 
-use libraw_rs_sys as sys;
+use libraw_sys as sys;
 
 pub struct ProcessedImage {
     inner: *mut sys::libraw_processed_image_t,

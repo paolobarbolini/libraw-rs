@@ -6,5 +6,6 @@
     clippy::redundant_static_lifetimes,
     non_snake_case
 )]
+#![no_std]
 
 include!(concat!(env!("OUT_DIR"), "/bindings.rs"));

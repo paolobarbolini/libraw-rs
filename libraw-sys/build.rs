@@ -115,6 +115,7 @@ fn build(out_dir: &Path) {
 fn bindings(out_dir: &Path) {
     let bindings = bindgen::Builder::default()
         .header("libraw/libraw/libraw.h")
+        .use_core()
         .ctypes_prefix("libc")
         .generate_comments(true)
         .parse_callbacks(Box::new(bindgen::CargoCallbacks))

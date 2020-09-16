@@ -1,3 +1,6 @@
 [submodule "libraw-sys/libraw"]
 	path = libraw-sys/libraw
 	url = https://github.com/LibRaw/LibRaw.git
+[submodule "samples"]
+	path = samples
+	url = https://github.com/syoyo/raw-images.git

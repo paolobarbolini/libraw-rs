@@ -94,15 +94,12 @@ fn build(out_dir: &Path) {
     // libraw.file("libraw/src/libraw_cxx.cpp");
     libraw.file("libraw/src/libraw_datastream.cpp");
 
-    // TODO: is this necessary?
-    libraw.flag_if_supported("-Wno-type-limits");
-    libraw.flag_if_supported("-Wno-unused-parameter");
-    libraw.flag_if_supported("-Wno-implicit-fallthrough");
-    libraw.flag_if_supported("-Wno-sign-compare");
-    libraw.flag_if_supported("-Wno-restrict");
-    libraw.flag_if_supported("-Wno-missing-field-initializers");
+    libraw.warnings(false);
+    libraw.extra_warnings(false);
+    // do I really have to supress all of these?
     libraw.flag_if_supported("-Wno-format-truncation");
-    libraw.flag_if_supported("-Wno-shift-negative-value");
+    libraw.flag_if_supported("-Wno-unused-result");
+    libraw.flag_if_supported("-Wno-format-overflow");
     // thread safety
     libraw.flag("-pthread");
     libraw.static_flag(true);

@@ -9,6 +9,7 @@ categories = ["multimedia::images", "api-bindings"]
 keywords = ["raw"]
 readme = "README.md"
 edition = "2018"
+include = ["src/**/*", "LICENSE-*", "README.md"]
 
 [lib]
 name = "libraw"

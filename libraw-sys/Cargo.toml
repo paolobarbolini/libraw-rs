@@ -1,6 +1,6 @@
 [package]
 name = "libraw-rs-sys"
-version = "0.0.1+libraw-0.20.0" # remember to update html_root_url
+version = "0.0.2+libraw-0.20.0" # remember to update html_root_url
 authors = ["Paolo Barbolini <paolo@paolo565.org>"]
 description = "FFI bindings to LibRaw"
 license = "MIT/Apache-2.0"

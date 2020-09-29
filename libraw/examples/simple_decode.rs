@@ -7,7 +7,7 @@ fn main() {
     let buf = fs::read("raw.RW2").expect("read in");
 
     let processor = Processor::new();
-    let processed = processor.decode(buf).expect("decoding successful");
+    let processed = processor.decode(&buf).expect("decoding successful");
 
     let mut out = File::create("out.ppm").expect("create out");
     let header = format!("P6 {} {} {}\n", processed.width(), processed.height(), 255);

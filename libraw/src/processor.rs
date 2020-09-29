@@ -11,9 +11,9 @@ impl Processor {
         Self { inner }
     }
 
-    pub fn decode(self, mut buf: Vec<u8>) -> Result<ProcessedImage> {
+    pub fn decode(self, buf: &[u8]) -> Result<ProcessedImage> {
         Error::check(unsafe {
-            sys::libraw_open_buffer(self.inner, buf.as_mut_ptr() as *mut _, buf.len())
+            sys::libraw_open_buffer(self.inner, buf.as_ptr() as *const _, buf.len())
         })?;
         Error::check(unsafe { sys::libraw_unpack(self.inner) })?;
         Error::check(unsafe { sys::libraw_dcraw_process(self.inner) })?;

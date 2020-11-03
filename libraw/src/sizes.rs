@@ -2,16 +2,16 @@ use libraw_sys as sys;
 
 pub struct Sizes {
     pub raw_height: u16,
-	pub raw_width: u16,
+    pub raw_width: u16,
     pub height: u16,
     pub width: u16,
-	pub top_margin: u16,
+    pub top_margin: u16,
     pub left_margin: u16,
-	pub iheight: u16,
+    pub iheight: u16,
     pub iwidth: u16,
-	pub raw_pitch: u32,
-	pub pixel_aspect: f64,
-    pub flip: i32
+    pub raw_pitch: u32,
+    pub pixel_aspect: f64,
+    pub flip: i32,
 }
 
 impl Sizes {
@@ -29,7 +29,7 @@ impl Sizes {
             iwidth: deref.iwidth,
             raw_pitch: deref.raw_pitch,
             pixel_aspect: deref.pixel_aspect,
-            flip: deref.flip
+            flip: deref.flip,
         }
     }
 }

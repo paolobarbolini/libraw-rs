@@ -14,11 +14,14 @@ impl Decoder {
     pub fn decode(self, buf: &[u8]) -> Result<DecodedImage> {
         Error::check(unsafe {
             sys::libraw_open_buffer(self.inner, buf.as_ptr() as *const _, buf.len())
-        }).unwrap();
+        })
+        .unwrap();
         Error::check(unsafe { sys::libraw_unpack(self.inner) }).unwrap();
-        debug_assert!(!unsafe{(*self.inner).rawdata.raw_alloc}.is_null());
+        debug_assert!(!unsafe { (*self.inner).rawdata.raw_alloc }.is_null());
 
-        let decoded = DecodedImage::new(&unsafe{(*self.inner).rawdata}, &unsafe{(*self.inner).sizes});
+        let decoded = DecodedImage::new(&unsafe { (*self.inner).rawdata }, &unsafe {
+            (*self.inner).sizes
+        });
         Ok(decoded)
     }
 }

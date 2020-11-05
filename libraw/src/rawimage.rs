@@ -3,13 +3,13 @@ use std::ops::Deref;
 use std::slice;
 
 pub struct RawImage {
-    processor: Processor
+    processor: Processor,
 }
 
 impl RawImage {
     pub(crate) fn new(processor: Processor) -> Self {
         Self {
-            processor: processor
+            processor: processor,
         }
     }
 

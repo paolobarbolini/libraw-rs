@@ -11,7 +11,7 @@ impl Processor {
         Self { inner }
     }
 
-    pub fn decode(&self, buf: &[u8]) -> Result<RawImage> {
+    pub fn decode(self, buf: &[u8]) -> Result<RawImage> {
         Error::check(unsafe {
             sys::libraw_open_buffer(self.inner, buf.as_ptr() as *const _, buf.len())
         })?;

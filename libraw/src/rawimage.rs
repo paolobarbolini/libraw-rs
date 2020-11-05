@@ -1,27 +1,29 @@
 use crate::{Processor, Sizes};
-use std::marker::PhantomData;
 use std::ops::Deref;
 use std::slice;
 
 use libraw_sys as sys;
 
-pub struct RawImage<'a> {
+pub struct RawImage {
+    _processor: Processor,
     rawdata: *const sys::libraw_rawdata_t,
     pub sizes: Sizes,
-    phantom: PhantomData<&'a Processor>,
 }
 
-impl<'a> RawImage<'a> {
-    pub(crate) fn new(processor: &'a Processor) -> Self {
+impl RawImage {
+    pub(crate) fn new(processor: Processor) -> Self {
+        let rawdata: *const sys::libraw_rawdata_t = unsafe { &(*processor.inner).rawdata };
+        let sizes = Sizes::new(unsafe { (*processor.inner).sizes });
+
         Self {
-            rawdata: unsafe { &(*processor.inner).rawdata },
-            sizes: Sizes::new(unsafe { (*processor.inner).sizes }),
-            phantom: PhantomData,
+            _processor: processor,
+            rawdata,
+            sizes,
         }
     }
 }
 
-impl<'a> Deref for RawImage<'a> {
+impl Deref for RawImage {
     type Target = [u16];
 
     fn deref(&self) -> &Self::Target {

@@ -15,21 +15,19 @@ pub struct Sizes {
 }
 
 impl Sizes {
-    pub(crate) fn new(sizes: &sys::libraw_image_sizes_t) -> Self {
-        let deref = *sizes;
-
+    pub(crate) fn new(sizes: sys::libraw_image_sizes_t) -> Self {
         Self {
-            raw_height: deref.raw_height,
-            raw_width: deref.raw_width,
-            height: deref.height,
-            width: deref.width,
-            top_margin: deref.top_margin,
-            left_margin: deref.left_margin,
-            iheight: deref.iheight,
-            iwidth: deref.iwidth,
-            raw_pitch: deref.raw_pitch,
-            pixel_aspect: deref.pixel_aspect,
-            flip: deref.flip,
+            raw_height: sizes.raw_height,
+            raw_width: sizes.raw_width,
+            height: sizes.height,
+            width: sizes.width,
+            top_margin: sizes.top_margin,
+            left_margin: sizes.left_margin,
+            iheight: sizes.iheight,
+            iwidth: sizes.iwidth,
+            raw_pitch: sizes.raw_pitch,
+            pixel_aspect: sizes.pixel_aspect,
+            flip: sizes.flip,
         }
     }
 }

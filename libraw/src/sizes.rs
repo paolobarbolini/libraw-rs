@@ -1,5 +1,6 @@
 use libraw_sys as sys;
 
+#[derive(Debug, Copy, Clone)]
 pub struct Sizes {
     pub raw_height: u16,
     pub raw_width: u16,

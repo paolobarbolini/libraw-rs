@@ -48,7 +48,7 @@ mod process {
 
 mod decode {
     use super::*;
-    
+
     #[test]
     fn colorchart_5d2_6000k() {
         let buf = fs::read("../samples/images/colorchart-5D2-6000K.dng").expect("read in");
@@ -61,7 +61,10 @@ mod decode {
         assert_eq!(sizes.height, 3752);
         assert_eq!(sizes.raw_width, 5792);
         assert_eq!(sizes.raw_height, 3804);
-        assert_eq!(sizes.raw_width as usize * sizes.raw_height as usize, (&decoded).len());
+        assert_eq!(
+            sizes.raw_width as usize * sizes.raw_height as usize,
+            (&decoded).len()
+        );
     }
 
     #[test]
@@ -76,7 +79,10 @@ mod decode {
         assert_eq!(sizes.height, 3464);
         assert_eq!(sizes.raw_width, 5360);
         assert_eq!(sizes.raw_height, 3516);
-        assert_eq!(sizes.raw_width as usize * sizes.raw_height as usize, (&decoded).len());
+        assert_eq!(
+            sizes.raw_width as usize * sizes.raw_height as usize,
+            (&decoded).len()
+        );
     }
 
     #[test]
@@ -95,7 +101,10 @@ mod decode {
         assert_eq!(sizes.height, 3024);
         assert_eq!(sizes.raw_width, 4032);
         assert_eq!(sizes.raw_height, 3024);
-        assert_eq!(sizes.raw_width as usize * sizes.raw_height as usize, (&decoded).len());
+        assert_eq!(
+            sizes.raw_width as usize * sizes.raw_height as usize,
+            (&decoded).len()
+        );
     }
 
     #[test]
@@ -110,6 +119,9 @@ mod decode {
         assert_eq!(sizes.height, 4028);
         assert_eq!(sizes.raw_width, 6080);
         assert_eq!(sizes.raw_height, 4028);
-        assert_eq!(sizes.raw_width as usize * sizes.raw_height as usize, (&decoded).len());
+        assert_eq!(
+            sizes.raw_width as usize * sizes.raw_height as usize,
+            (&decoded).len()
+        );
     }
 }

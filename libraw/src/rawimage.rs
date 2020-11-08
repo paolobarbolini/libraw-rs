@@ -8,6 +8,8 @@ pub struct RawImage {
 
 impl RawImage {
     pub(crate) fn new(processor: Processor) -> Self {
+        debug_assert!(!unsafe { (*processor.inner).rawdata.raw_alloc }.is_null());
+
         Self { processor }
     }
 

@@ -1,3 +1,5 @@
+use std::mem;
+
 use crate::{Error, ProcessedImage, RawImage, Result};
 use libraw_sys as sys;
 
@@ -11,39 +13,38 @@ impl Processor {
         Self { inner }
     }
 
-    pub fn decode(self, buf: &[u8]) -> Result<RawImage> {
+    fn open(&self, buf: &[u8]) -> Result<()> {
         Error::check(unsafe {
             sys::libraw_open_buffer(self.inner, buf.as_ptr() as *const _, buf.len())
         })?;
         Error::check(unsafe { sys::libraw_unpack(self.inner) })?;
-        debug_assert!(!unsafe { (*self.inner).rawdata.raw_alloc }.is_null());
+
+        Ok(())
+    }
+
+    pub fn decode(self, buf: &[u8]) -> Result<RawImage> {
+        self.open(buf)?;
 
         let decoded = RawImage::new(self);
         Ok(decoded)
     }
 
+    #[inline]
     pub fn process_8bit(self, buf: &[u8]) -> Result<ProcessedImage<u8>> {
-        Error::check(unsafe {
-            sys::libraw_open_buffer(self.inner, buf.as_ptr() as *const _, buf.len())
-        })?;
-        Error::check(unsafe { sys::libraw_unpack(self.inner) })?;
-        Error::check(unsafe { sys::libraw_dcraw_process(self.inner) })?;
-
-        let mut result = 0i32;
-        let processed = unsafe { sys::libraw_dcraw_make_mem_image(self.inner, &mut result) };
-        Error::check(result)?;
-
-        let processed = unsafe { ProcessedImage::from_raw(processed) };
-        Ok(processed)
+        self.process(buf)
     }
 
+    #[inline]
     pub fn process_16bit(self, buf: &[u8]) -> Result<ProcessedImage<u16>> {
-        unsafe { (*self.inner).params.output_bps = 16 };
+        self.process(buf)
+    }
 
-        Error::check(unsafe {
-            sys::libraw_open_buffer(self.inner, buf.as_ptr() as *const _, buf.len())
-        })?;
-        Error::check(unsafe { sys::libraw_unpack(self.inner) })?;
+    fn process<T>(self, buf: &[u8]) -> Result<ProcessedImage<T>> {
+        let bps = mem::size_of::<T>() * 8;
+        debug_assert!(bps == 8 || bps == 16);
+        unsafe { (*self.inner).params.output_bps = bps as i32 };
+
+        self.open(buf)?;
         Error::check(unsafe { sys::libraw_dcraw_process(self.inner) })?;
 
         let mut result = 0i32;

@@ -9,7 +9,7 @@ fn main() {
     let processor = Processor::new();
     let processed = processor.process_8bit(&buf).expect("processing successful");
 
-    let mut out = File::create("out.ppm").expect("create out");
+    let mut out = File::create("out_8bit.ppm").expect("create out");
     let header = format!("P6 {} {} {}\n", processed.width(), processed.height(), 255);
     out.write_all(header.as_ref()).expect("header");
     out.write_all(&processed).expect("pixels");

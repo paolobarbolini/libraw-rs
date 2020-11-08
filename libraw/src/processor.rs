@@ -1,8 +1,8 @@
-use crate::{Error, ProcessedImage, Result};
+use crate::{Error, ProcessedImage, RawImage, Result};
 use libraw_sys as sys;
 
 pub struct Processor {
-    inner: *mut sys::libraw_data_t,
+    pub(crate) inner: *mut sys::libraw_data_t,
 }
 
 impl Processor {
@@ -11,7 +11,18 @@ impl Processor {
         Self { inner }
     }
 
-    pub fn decode(self, buf: &[u8]) -> Result<ProcessedImage> {
+    pub fn decode(self, buf: &[u8]) -> Result<RawImage> {
+        Error::check(unsafe {
+            sys::libraw_open_buffer(self.inner, buf.as_ptr() as *const _, buf.len())
+        })?;
+        Error::check(unsafe { sys::libraw_unpack(self.inner) })?;
+        debug_assert!(!unsafe { (*self.inner).rawdata.raw_alloc }.is_null());
+
+        let decoded = RawImage::new(self);
+        Ok(decoded)
+    }
+
+    pub fn process(self, buf: &[u8]) -> Result<ProcessedImage> {
         Error::check(unsafe {
             sys::libraw_open_buffer(self.inner, buf.as_ptr() as *const _, buf.len())
         })?;

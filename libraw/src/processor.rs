@@ -22,7 +22,24 @@ impl Processor {
         Ok(decoded)
     }
 
-    pub fn process(self, buf: &[u8]) -> Result<ProcessedImage> {
+    pub fn process_8bit(self, buf: &[u8]) -> Result<ProcessedImage<u8>> {
+        Error::check(unsafe {
+            sys::libraw_open_buffer(self.inner, buf.as_ptr() as *const _, buf.len())
+        })?;
+        Error::check(unsafe { sys::libraw_unpack(self.inner) })?;
+        Error::check(unsafe { sys::libraw_dcraw_process(self.inner) })?;
+
+        let mut result = 0i32;
+        let processed = unsafe { sys::libraw_dcraw_make_mem_image(self.inner, &mut result) };
+        Error::check(result)?;
+
+        let processed = unsafe { ProcessedImage::from_raw(processed) };
+        Ok(processed)
+    }
+
+    pub fn process_16bit(self, buf: &[u8]) -> Result<ProcessedImage<u16>> {
+        unsafe { (*self.inner).params.output_bps = 16 };
+
         Error::check(unsafe {
             sys::libraw_open_buffer(self.inner, buf.as_ptr() as *const _, buf.len())
         })?;

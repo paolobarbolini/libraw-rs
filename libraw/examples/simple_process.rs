@@ -7,7 +7,7 @@ fn main() {
     let buf = fs::read("raw.RW2").expect("read in");
 
     let processor = Processor::new();
-    let processed = processor.process(&buf).expect("processing successful");
+    let processed = processor.process_8bit(&buf).expect("processing successful");
 
     let mut out = File::create("out.ppm").expect("create out");
     let header = format!("P6 {} {} {}\n", processed.width(), processed.height(), 255);

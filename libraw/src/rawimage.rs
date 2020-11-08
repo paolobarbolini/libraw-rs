@@ -8,9 +8,7 @@ pub struct RawImage {
 
 impl RawImage {
     pub(crate) fn new(processor: Processor) -> Self {
-        Self {
-            processor: processor,
-        }
+        Self { processor }
     }
 
     pub fn sizes(&self) -> Sizes {

@@ -8,4 +8,9 @@
 )]
 #![no_std]
 
+#[cfg(feature = "bindgen")]
 include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
+#[cfg(not(feature = "bindgen"))]
+mod bindings;
+#[cfg(not(feature = "bindgen"))]
+pub use bindings::*;

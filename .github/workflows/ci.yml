@@ -79,6 +79,8 @@ jobs:
           rustup default ${{ matrix.rust }}
           rustup update --no-self-update ${{ matrix.rust }}
 
-      - name: Test
-        run: |
-          cargo test --all ${{ matrix.args }}
+      - name: Test (builtin bindings)
+        run: cargo test --all
+
+      - name: Test (regenerate bindings)
+        run: cargo test --all --features bindgen

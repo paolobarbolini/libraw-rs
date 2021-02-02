@@ -7,7 +7,7 @@
 
 Work in progress bindings to the LibRaw C APIs.
 
-This library is still in it's early days, and is not production ready.
+This library is still in it's early days, feel free to open a PR if a feature is missing.
 Contributions and suggestions are welcome on GitHub.
 
 ## License

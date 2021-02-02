@@ -10,7 +10,7 @@ keywords = ["raw"]
 readme = "README.md"
 edition = "2018"
 build = "build.rs"
-include = ["src/lib.rs", "LICENSE-*", "README.md", "libraw/libraw/*", "libraw/src/*", "libraw/internal/*", "libraw/COPYRIGHT", "libraw/LICENSE.*", "build.rs"]
+include = ["src/lib.rs", "src/bindings.rs", "LICENSE-*", "README.md", "libraw/libraw/*", "libraw/src/*", "libraw/internal/*", "libraw/COPYRIGHT", "libraw/LICENSE.*", "build.rs"]
 
 [lib]
 name = "libraw_sys"

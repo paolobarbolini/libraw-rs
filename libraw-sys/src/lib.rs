@@ -1,4 +1,4 @@
-#![doc(html_root_url = "https://docs.rs/libraw-rs-sys/0.0.3")]
+#![doc(html_root_url = "https://docs.rs/libraw-rs-sys/0.0.4")]
 #![allow(
     non_camel_case_types,
     non_upper_case_globals,

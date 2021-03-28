@@ -49,6 +49,8 @@ impl Deref for ProcessedImage<u16> {
 
     fn deref(&self) -> &Self::Target {
         unsafe {
+            debug_assert_eq!((*self.inner).data.as_ptr() as usize % 2, 0);
+
             slice::from_raw_parts(
                 (*self.inner).data.as_ptr() as *const u16,
                 (*self.inner).data_size as usize / 2,

@@ -1,6 +1,6 @@
 use std::mem;
 
-use crate::{Error, ProcessedImage, RawImage, Result};
+use crate::{BitDepth, Error, ProcessedImage, RawImage, Result};
 use libraw_sys as sys;
 
 pub struct Processor {
@@ -39,7 +39,7 @@ impl Processor {
         self.process(buf)
     }
 
-    fn process<T>(self, buf: &[u8]) -> Result<ProcessedImage<T>> {
+    fn process<T: BitDepth>(self, buf: &[u8]) -> Result<ProcessedImage<T>> {
         let bps = mem::size_of::<T>() * 8;
         debug_assert!(bps == 8 || bps == 16);
         unsafe { (*self.inner).params.output_bps = bps as i32 };

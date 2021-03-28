@@ -3,21 +3,22 @@ use std::mem;
 use std::ops::Deref;
 use std::slice;
 
+use crate::BitDepth;
 use libraw_sys as sys;
 
 pub struct ProcessedImage<T> {
     inner: *mut sys::libraw_processed_image_t,
-    _bits: PhantomData<T>,
+    marker_: PhantomData<T>,
 }
 
-impl<T> ProcessedImage<T> {
+impl<T: BitDepth> ProcessedImage<T> {
     pub(crate) unsafe fn from_raw(ptr: *mut sys::libraw_processed_image_t) -> Self {
         debug_assert!(!ptr.is_null());
         debug_assert_eq!((*ptr).bits as usize, mem::size_of::<T>() * 8);
 
         Self {
             inner: ptr,
-            _bits: PhantomData,
+            marker_: PhantomData,
         }
     }
 

@@ -4,8 +4,9 @@
 [![Documentation](https://docs.rs/libraw-rs/badge.svg)](https://docs.rs/libraw-rs)
 [![Rustc Version 1.40.0+](https://img.shields.io/badge/rustc-1.40.0+-lightgray.svg)](https://blog.rust-lang.org/2019/12/19/Rust-1.40.0.html)
 [![CI](https://github.com/paolobarbolini/libraw-rs/workflows/CI/badge.svg)](https://github.com/paolobarbolini/libraw-rs/actions?query=workflow%3ACI)
+![Passively Maintained](https://img.shields.io/badge/Maintenance%20Level-Passively%20Maintained-yellowgreen.svg)
 
-Work in progress bindings to the LibRaw C APIs.
+Bindings to the LibRaw C APIs.
 
 This library is still in it's early days, feel free to open a PR if a feature is missing.
 Contributions and suggestions are welcome on GitHub.

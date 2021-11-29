@@ -7,6 +7,7 @@ use sys::{
 };
 
 #[allow(non_snake_case)]
+#[derive(Clone, Debug)]
 pub struct Colordata {
     pub curve: [u16; 65536],
     pub black: u32,
@@ -34,7 +35,8 @@ pub struct Colordata {
     pub rgb_cam: [[f32; 4]; 3],
 
     pub phase_one_data: PhaseOne,
-    pub flash_used: f32, // Why the heck is this a float. Can it be a bool?
+    // Seemingly the level of flash used? I've seen values from 9 to 32 here
+    pub flash_used: f32,
     pub canon_ev: f32,
 
     pub model2: [i8; 64], // NOTE: How to stringify this? Should I?
@@ -104,6 +106,7 @@ impl Colordata {
     }
 }
 
+#[derive(Clone, Debug)]
 pub struct PhaseOne {
     pub format: i32,
     pub key_off: i32,
@@ -132,6 +135,7 @@ impl From<sys::ph1_t> for PhaseOne {
     }
 }
 
+#[derive(Clone, Debug)]
 pub struct DngColor {
     pub parsedfields: u32,
     pub illuminant: u16,
@@ -153,6 +157,7 @@ impl From<sys::libraw_dng_color_t> for DngColor {
 }
 
 #[allow(non_snake_case)]
+#[derive(Clone, Debug)]
 pub struct DngLevels {
     pub parsedfields: u32,
     //TODO: Separate out fields of cblack like in the main Colordata struct
@@ -186,6 +191,7 @@ impl From<sys::libraw_dng_levels_t> for DngLevels {
     }
 }
 
+#[derive(Clone, Debug)]
 pub struct PhaseOneColor {
     pub romm_cam: [f32; 9],
 }
@@ -199,20 +205,33 @@ impl From<sys::libraw_P1_color_t> for PhaseOneColor {
 }
 
 #[allow(non_camel_case_types)]
+#[derive(Clone, Debug)]
 pub enum ExifColorSpace {
     Unknown,
     sRGB,
     AdobeRgb,
+    Unrecognized(i32),
 }
 
 impl ExifColorSpace {
+    // NOTE: In colordata_t this field was an i32 but all of the constants are u32?
     fn from_sys(sys_int: i32) -> Self {
         #[allow(non_upper_case_globals)]
         match sys_int as u32 {
             LibRaw_colorspace_LIBRAW_COLORSPACE_Unknown => ExifColorSpace::Unknown,
             LibRaw_colorspace_LIBRAW_COLORSPACE_AdobeRGB => ExifColorSpace::AdobeRgb,
             LibRaw_colorspace_LIBRAW_COLORSPACE_sRGB => ExifColorSpace::sRGB,
-            _ => panic!(),
+            _ => ExifColorSpace::Unrecognized(sys_int),
+        }
+    }
+
+    pub fn as_sys(&self) -> i32 {
+        #[allow(non_upper_case_globals)]
+        match self {
+            ExifColorSpace::Unknown => LibRaw_colorspace_LIBRAW_COLORSPACE_Unknown as i32,
+            ExifColorSpace::AdobeRgb => LibRaw_colorspace_LIBRAW_COLORSPACE_AdobeRGB as i32,
+            ExifColorSpace::sRGB => LibRaw_colorspace_LIBRAW_COLORSPACE_sRGB as i32,
+            ExifColorSpace::Unrecognized(sys_int) => *sys_int,
         }
     }
 }

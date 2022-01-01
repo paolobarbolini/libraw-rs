@@ -5,9 +5,9 @@ fn main() {
     let out_dir_ = env::var_os("OUT_DIR").unwrap();
     let out_dir = Path::new(&out_dir_);
 
-    build(&out_dir);
+    build(out_dir);
     #[cfg(feature = "bindgen")]
-    bindings(&out_dir);
+    bindings(out_dir);
 }
 
 fn build(out_dir: &Path) {

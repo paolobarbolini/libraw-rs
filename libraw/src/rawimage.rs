@@ -1,4 +1,4 @@
-use crate::{Processor, Sizes};
+use crate::{Colordata, Processor, Sizes};
 use std::ops::Deref;
 use std::slice;
 
@@ -15,6 +15,10 @@ impl RawImage {
 
     pub fn sizes(&self) -> Sizes {
         Sizes::new(unsafe { (*self.processor.inner).sizes })
+    }
+
+    pub fn color(&self) -> Colordata {
+        Colordata::new(unsafe { (*self.processor.inner).color })
     }
 }
 

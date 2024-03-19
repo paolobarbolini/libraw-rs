@@ -16,7 +16,7 @@ fn colorchart_5d2_6000k() {
     assert_eq!(sizes.raw_height, 3804);
     assert_eq!(
         sizes.raw_width as usize * sizes.raw_height as usize,
-        (&decoded).len()
+        decoded.len()
     );
 }
 
@@ -34,7 +34,7 @@ fn colorchart_eos_7d() {
     assert_eq!(sizes.raw_height, 3516);
     assert_eq!(
         sizes.raw_width as usize * sizes.raw_height as usize,
-        (&decoded).len()
+        decoded.len()
     );
 }
 
@@ -56,7 +56,7 @@ fn colorchart_iphone7plus_cloudy() {
     assert_eq!(sizes.raw_height, 3024);
     assert_eq!(
         sizes.raw_width as usize * sizes.raw_height as usize,
-        (&decoded).len()
+        decoded.len()
     );
 }
 
@@ -74,6 +74,6 @@ fn komainu() {
     assert_eq!(sizes.raw_height, 4028);
     assert_eq!(
         sizes.raw_width as usize * sizes.raw_height as usize,
-        (&decoded).len()
+        decoded.len()
     );
 }

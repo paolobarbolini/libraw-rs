@@ -20,4 +20,4 @@ libc = "0.2"
 
 [build-dependencies]
 cc = { version = "1", features = ["parallel"] }
-bindgen = { version = "0.59", default-features = false, features = ["runtime"], optional = true }
+bindgen = { version = "0.69", default-features = false, features = ["runtime"], optional = true }

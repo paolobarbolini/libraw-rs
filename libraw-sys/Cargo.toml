@@ -8,7 +8,7 @@ repository = "https://github.com/paolobarbolini/libraw-rs"
 categories = ["multimedia::images", "external-ffi-bindings"]
 keywords = ["raw"]
 readme = "README.md"
-edition = "2018"
+edition = "2021"
 build = "build.rs"
 include = ["src/lib.rs", "src/bindings.rs", "LICENSE-*", "README.md", "libraw/libraw/*", "libraw/src/*", "libraw/internal/*", "libraw/COPYRIGHT", "libraw/LICENSE.*", "build.rs"]
 

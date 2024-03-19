@@ -8,7 +8,7 @@ repository = "https://github.com/paolobarbolini/libraw-rs"
 categories = ["multimedia::images", "api-bindings"]
 keywords = ["raw"]
 readme = "README.md"
-edition = "2018"
+edition = "2021"
 include = ["src/**/*", "LICENSE-*", "README.md"]
 
 [lib]

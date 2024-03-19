@@ -19,5 +19,5 @@ name = "libraw_sys"
 libc = "0.2"
 
 [build-dependencies]
-cc = { version = "1", features = ["parallel"] }
+cc = { version = "1.0.42", features = ["parallel"] }
 bindgen = { version = "0.69", default-features = false, features = ["runtime"], optional = true }

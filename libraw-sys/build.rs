@@ -120,7 +120,7 @@ fn bindings(out_dir: &Path) {
         .use_core()
         .ctypes_prefix("libc")
         .generate_comments(true)
-        .parse_callbacks(Box::new(bindgen::CargoCallbacks))
+        .parse_callbacks(Box::new(bindgen::CargoCallbacks::new()))
         // API improvements
         .derive_eq(true)
         .size_t_is_usize(true)

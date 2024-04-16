@@ -29,6 +29,20 @@ impl<T: BitDepth> ProcessedImage<T> {
     pub fn height(&self) -> u32 {
         unsafe { (*self.inner).height }.into()
     }
+
+    pub fn colors(&self) -> u16 {
+        unsafe { (*self.inner).colors }.into()
+    }
+
+    pub fn pixels(&self) -> Option<&[u8]> {
+        let pixels = unsafe {
+            slice::from_raw_parts(
+                (*self.inner).data.as_ptr(),
+                (*self.inner).data_size as usize,
+            )
+        };
+        Some(&pixels)
+    }
 }
 
 impl Deref for ProcessedImage<u8> {

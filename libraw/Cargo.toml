@@ -16,6 +16,7 @@ name = "libraw"
 
 [dependencies]
 libraw-rs-sys = { version = "0.0.4", path = "../libraw-sys" }
+mozjpeg = "0.10.7"
 
 [features]
 bindgen = ["libraw-rs-sys/bindgen"]

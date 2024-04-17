@@ -1,12 +1,11 @@
 /// This is simple converion without metadata 
 use std::fs::{self, File};
 use std::io::Write;
-use mozjpeg::*;
 
 use libraw::Processor;
 
 fn main() {
-    let buf = fs::read("raw.CR2").expect("read in");
+    let buf = fs::read("/home/nikita/Desktop/Rust/libraw-rs/samples/images/colorchart-eos-7d.cr2").expect("read in");
 
     let mut processor = Processor::new();
 

@@ -4,7 +4,7 @@ use std::io::Write;
 use libraw::Processor;
 
 fn main() {
-    let buf = fs::read("raw.RW2").expect("read in");
+    let buf = fs::read("/home/nikita/Desktop/Rust/libraw-rs/samples/images/colorchart-eos-7d.cr2").expect("read in");
 
     let mut processor = Processor::new();
 

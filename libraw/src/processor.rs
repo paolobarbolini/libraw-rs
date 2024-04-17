@@ -14,11 +14,9 @@ impl Processor {
     }
 
     pub fn gamma(&mut self, mut gamm_0: f64, gamm_1: f64) {
-
         if gamm_0 != 0.0 {
             gamm_0 = 1.0 / gamm_0;
         }
-
         unsafe {
             (*self.inner).params.gamm[0] = gamm_0;
             (*self.inner).params.gamm[1] = gamm_1;

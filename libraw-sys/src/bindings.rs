@@ -4,7 +4,7 @@ pub const _FILE_OFFSET_BITS: u32 = 64;
 pub const _LIBC_LIMITS_H_: u32 = 1;
 pub const _FEATURES_H: u32 = 1;
 pub const _DEFAULT_SOURCE: u32 = 1;
-pub const __GLIBC_USE_ISOC2X: u32 = 0;
+pub const __GLIBC_USE_ISOC23: u32 = 0;
 pub const __USE_ISOC11: u32 = 1;
 pub const __USE_ISOC99: u32 = 1;
 pub const __USE_ISOC95: u32 = 1;
@@ -23,12 +23,13 @@ pub const __WORDSIZE: u32 = 64;
 pub const __WORDSIZE_TIME64_COMPAT32: u32 = 1;
 pub const __SYSCALL_WORDSIZE: u32 = 64;
 pub const __TIMESIZE: u32 = 64;
+pub const __USE_TIME_BITS64: u32 = 1;
 pub const __USE_MISC: u32 = 1;
 pub const __USE_ATFILE: u32 = 1;
 pub const __USE_FORTIFY_LEVEL: u32 = 0;
 pub const __GLIBC_USE_DEPRECATED_GETS: u32 = 0;
 pub const __GLIBC_USE_DEPRECATED_SCANF: u32 = 0;
-pub const __GLIBC_USE_C2X_STRTOL: u32 = 0;
+pub const __GLIBC_USE_C23_STRTOL: u32 = 0;
 pub const _STDC_PREDEF_H: u32 = 1;
 pub const __STDC_IEC_559__: u32 = 1;
 pub const __STDC_IEC_60559_BFP__: u32 = 201404;
@@ -37,17 +38,17 @@ pub const __STDC_IEC_60559_COMPLEX__: u32 = 201404;
 pub const __STDC_ISO_10646__: u32 = 201706;
 pub const __GNU_LIBRARY__: u32 = 6;
 pub const __GLIBC__: u32 = 2;
-pub const __GLIBC_MINOR__: u32 = 39;
+pub const __GLIBC_MINOR__: u32 = 40;
 pub const _SYS_CDEFS_H: u32 = 1;
 pub const __glibc_c99_flexarr_available: u32 = 1;
 pub const __LDOUBLE_REDIRECTS_TO_FLOAT128_ABI: u32 = 0;
 pub const __HAVE_GENERIC_SELECTION: u32 = 1;
 pub const __GLIBC_USE_LIB_EXT2: u32 = 0;
 pub const __GLIBC_USE_IEC_60559_BFP_EXT: u32 = 0;
-pub const __GLIBC_USE_IEC_60559_BFP_EXT_C2X: u32 = 0;
+pub const __GLIBC_USE_IEC_60559_BFP_EXT_C23: u32 = 0;
 pub const __GLIBC_USE_IEC_60559_EXT: u32 = 0;
 pub const __GLIBC_USE_IEC_60559_FUNCS_EXT: u32 = 0;
-pub const __GLIBC_USE_IEC_60559_FUNCS_EXT_C2X: u32 = 0;
+pub const __GLIBC_USE_IEC_60559_FUNCS_EXT_C23: u32 = 0;
 pub const __GLIBC_USE_IEC_60559_TYPES_EXT: u32 = 0;
 pub const MB_LEN_MAX: u32 = 16;
 pub const _BITS_POSIX1_LIM_H: u32 = 1;
@@ -621,7 +622,7 @@ pub const LIBRAW_XTRANS: u32 = 9;
 pub const LIBRAW_PROGRESS_THUMB_MASK: u32 = 268435455;
 pub const LIBRAW_MAJOR_VERSION: u32 = 0;
 pub const LIBRAW_MINOR_VERSION: u32 = 21;
-pub const LIBRAW_PATCH_VERSION: u32 = 2;
+pub const LIBRAW_PATCH_VERSION: u32 = 3;
 pub const LIBRAW_SHLIB_CURRENT: u32 = 23;
 pub const LIBRAW_SHLIB_REVISION: u32 = 0;
 pub const LIBRAW_SHLIB_AGE: u32 = 0;
@@ -890,7 +891,7 @@ extern "C" {
     ) -> libc::c_int;
 }
 extern "C" {
-    pub fn bcopy(__src: *const libc::c_void, __dest: *mut libc::c_void, __n: usize);
+    pub fn bcopy(__src: *const libc::c_void, __dest: *mut libc::c_void, __n: libc::c_ulong);
 }
 extern "C" {
     pub fn bzero(__s: *mut libc::c_void, __n: libc::c_ulong);
@@ -1278,7 +1279,7 @@ pub struct _IO_FILE {
     pub _wide_data: *mut _IO_wide_data,
     pub _freeres_list: *mut _IO_FILE,
     pub _freeres_buf: *mut libc::c_void,
-    pub __pad5: usize,
+    pub _prevchain: *mut *mut _IO_FILE,
     pub _mode: libc::c_int,
     pub _unused2: [libc::c_char; 20usize],
 }
@@ -1557,13 +1558,13 @@ fn bindgen_test_layout__IO_FILE() {
         )
     );
     assert_eq!(
-        unsafe { ::core::ptr::addr_of!((*ptr).__pad5) as usize - ptr as usize },
+        unsafe { ::core::ptr::addr_of!((*ptr)._prevchain) as usize - ptr as usize },
         184usize,
         concat!(
             "Offset of field: ",
             stringify!(_IO_FILE),
             "::",
-            stringify!(__pad5)
+            stringify!(_prevchain)
         )
     );
     assert_eq!(

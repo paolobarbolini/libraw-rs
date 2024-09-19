@@ -1,0 +1,90 @@
+name: RS
+
+on:
+  pull_request:
+  push:
+    branches:
+      - dev
+
+env:
+  RUST_BACKTRACE: full
+
+jobs:
+  rustfmt:
+    name: rustfmt / linux / stable
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install rust
+        run: |
+          rustup update --no-self-update stable
+          rustup component add rustfmt
+
+      - name: cargo fmt
+        run: |
+          cargo fmt --all -- --check
+
+  clippy:
+    name: clippy / linux / stable
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+
+      - name: Install rust
+        run: |
+          rustup update --no-self-update stable
+          rustup component add clippy
+
+      - name: cargo clippy
+        run: |
+          cargo clippy --all --all-targets
+
+  test:
+    name: test / ${{ matrix.name }}
+    runs-on: ${{ matrix.os || 'ubuntu-latest' }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: linux / stable
+            rust: stable
+          - name: linux / beta
+            rust: beta
+          - name: linux / nightly
+            rust: nightly
+          - name: linux / 1.63.0
+            rust: 1.63.0
+          - name: macOS / stable
+            os: macOS-latest
+          # TODO: fix
+          # - name: windows / stable
+          #   os: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+
+      - name: Install rust
+        run: |
+          rustup default ${{ matrix.rust }}
+          rustup update --no-self-update ${{ matrix.rust }}
+
+      - name: Use regex 1.9.6 (MSRV)
+        if: matrix.rust == '1.63.0'
+        run: cargo update -p regex --precise 1.9.6
+
+      - name: Test (builtin bindings)
+        run: cargo test --all
+
+      - name: Test (regenerate bindings)
+        run: cargo test --all --features bindgen

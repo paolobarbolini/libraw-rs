@@ -102,7 +102,14 @@ fn build(out_dir: &Path) {
     libraw.flag_if_supported("-Wno-unused-result");
     libraw.flag_if_supported("-Wno-format-overflow");
     // thread safety
-    libraw.flag("-pthread");
+    libraw.flag_if_supported("-pthread");
+    // for Windows
+    libraw.flag_if_supported("/EHsc");
+    libraw.flag_if_supported("/MP");
+    libraw.flag_if_supported("/DWIN32");
+    libraw.flag_if_supported("/DLIBRAW_NODLL");
+    libraw.flag_if_supported("/DLIBRAW_BUILDLIB");
+
     libraw.static_flag(true);
     libraw.compile("raw");
 

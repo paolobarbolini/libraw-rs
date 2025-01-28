@@ -64,9 +64,8 @@ jobs:
             rust: 1.63.0
           - name: macOS / stable
             os: macOS-latest
-          # TODO: fix
-          # - name: windows / stable
-          #   os: windows-latest
+          - name: windows / stable
+            os: windows-latest
 
     steps:
       - name: Checkout

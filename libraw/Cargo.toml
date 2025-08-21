@@ -10,6 +10,7 @@ keywords = ["raw"]
 readme = "README.md"
 edition = "2021"
 include = ["src/**/*", "LICENSE-*", "README.md"]
+rust-version = "1.63"
 
 [lib]
 name = "libraw"

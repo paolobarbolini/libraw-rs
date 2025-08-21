@@ -11,6 +11,7 @@ readme = "README.md"
 edition = "2021"
 build = "build.rs"
 include = ["src/lib.rs", "src/bindings.rs", "LICENSE-*", "README.md", "libraw/libraw/*", "libraw/src/*", "libraw/internal/*", "libraw/COPYRIGHT", "libraw/LICENSE.*", "build.rs"]
+rust-version = "1.63"
 
 [lib]
 name = "libraw_sys"

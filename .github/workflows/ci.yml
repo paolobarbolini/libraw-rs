@@ -60,8 +60,8 @@ jobs:
             rust: beta
           - name: linux / nightly
             rust: nightly
-          - name: linux / 1.63.0
-            rust: 1.63.0
+          - name: linux / 1.77.0
+            rust: 1.77.0
           - name: macOS / stable
             os: macOS-latest
           # TODO: fix

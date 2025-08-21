@@ -2,7 +2,7 @@
 
 [![crates.io](https://img.shields.io/crates/v/libraw-rs.svg)](https://crates.io/crates/libraw-rs)
 [![Documentation](https://docs.rs/libraw-rs/badge.svg)](https://docs.rs/libraw-rs)
-[![Rustc Version 1.63.0+](https://img.shields.io/badge/rustc-1.63.0+-lightgray.svg)](https://blog.rust-lang.org/2022/08/11/Rust-1.63.0.html)
+[![Rustc Version 1.77.0+](https://img.shields.io/badge/rustc-1.77.0+-lightgray.svg)](https://blog.rust-lang.org/2024/03/21/Rust-1.77.0/)
 [![CI](https://github.com/paolobarbolini/libraw-rs/workflows/CI/badge.svg)](https://github.com/paolobarbolini/libraw-rs/actions?query=workflow%3ACI)
 ![Passively Maintained](https://img.shields.io/badge/Maintenance%20Level-Passively%20Maintained-yellowgreen.svg)
 

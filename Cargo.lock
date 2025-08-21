@@ -154,7 +154,7 @@ dependencies = [
 
 [[package]]
 name = "libraw-rs-sys"
-version = "0.0.4+libraw-0.21.3"
+version = "0.0.4+libraw-0.21.4"
 dependencies = [
  "bindgen",
  "cc",

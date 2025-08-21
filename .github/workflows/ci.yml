@@ -79,10 +79,6 @@ jobs:
           rustup default ${{ matrix.rust }}
           rustup update --no-self-update ${{ matrix.rust }}
 
-      - name: Use regex 1.9.6 (MSRV)
-        if: matrix.rust == '1.63.0'
-        run: cargo update -p regex --precise 1.9.6
-
       - name: Test (builtin bindings)
         run: cargo test --all
 
